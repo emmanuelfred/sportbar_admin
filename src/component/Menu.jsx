@@ -108,13 +108,13 @@ const Menu = () => {
   return (
     <>
       {/* Header with Search & Cart */}
-      <div className="d-flex justify-content-between align-items-center mb-3 mt-3 p-2">
+      <div className="d-flex justify-content-between align-items-center mb-2 pt-2">
         <input
           type="text"
           placeholder="Search menu..."
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
-          style={{ flex: 1, marginRight: 10 ,borderRadius:5,padding:10,backgroundColor:'#2b2b2b'}}
+          style={{ flex: 1,marginBottom:0, marginRight: 10 ,borderRadius:5,padding:10,backgroundColor:'#2b2b2b'}}
         />
         <div onClick={() => setCartVisible(true)} style={{ position: "relative" }}>
           <IoCartOutline size={28} color="white" />
@@ -134,6 +134,7 @@ const Menu = () => {
             variant="secondary"
             onClick={() => handleCategorySelect(category)}
             className={`mr-2 ${selectedCategory === category ? "bg-primary text-white" : ""}`}
+            style={{margin:0,padding:5}}
           >
             {category}
           </Button>
@@ -150,14 +151,14 @@ const Menu = () => {
 
         {/* Ensure filteredItems exists before using length */}
         {filteredItems?.length > 0 ? (
-          <div className="d-flex flex-wrap justify-content-center">
+          <div className="d-flex flex-wrap justify-content-center" style={{gap:10}}>
             {filteredItems.map((item) => (
-              <Card key={item.id+item.category} className="m-2" style={{ minWidth: "250px",height:300 }}>
+              <Card key={item.id+item.category} className="" style={{ minWidth: "150px",height:300,overflow:'hidden', width:'45%' }}>
                 <Card.Img variant="top" src={item.img} style={{height:'48%'}}/>
                 <Card.Body>
-                  <Card.Title>{item.title}</Card.Title>
+                  <Card.Title style={{fontSize:15,fontWeight:'bold'}}>{item.title}</Card.Title>
                   <Card.Text>₦{item.price}</Card.Text>
-                  <Button variant="primary" onClick={() => addToCart(item)}>
+                  <Button variant="primary" onClick={() => addToCart(item)} style={{margin:0}}>
                     Order Now
                   </Button>
                 </Card.Body>

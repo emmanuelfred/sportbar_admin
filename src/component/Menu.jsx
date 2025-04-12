@@ -108,7 +108,7 @@ const Menu = () => {
   return (
     <>
       {/* Header with Search & Cart */}
-      <div className="d-flex justify-content-between align-items-center mb-2 pt-2">
+      <div className="d-flex justify-content-between align-items-center mb-2 pt-5 ">
         <input
           type="text"
           placeholder="Search menu..."

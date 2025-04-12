@@ -465,7 +465,7 @@ const CheckoutScreen = () => {
       {cart.length > 0 && (
         <div className="cart-footer">
           <p className="totalText">Total: {calculateTotal()}</p>
-      <Button className="orderButton" onClick={handlePlaceOrder}>
+      <Button className="orderButton" onClick={handlePlaceOrder} style={{marginTop:0}}>
         Place Order
       </Button>
         </div>

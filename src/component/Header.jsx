@@ -101,7 +101,11 @@ const styles = {
     alignItems: "center",
     padding: "10px",
     backgroundColor: "#2a5298",
-    height:'50px'
+    height:'50px',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
     
   },
   logo: {

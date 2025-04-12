@@ -15,7 +15,7 @@ const ProfileScreen = () => {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className="container d-flex  align-items-center pt-3">
         <h1 className="header">Profile</h1>
 
         {user ? (

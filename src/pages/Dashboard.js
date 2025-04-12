@@ -11,7 +11,7 @@ const Dashboard = () => {
   return (
     <div style={styles.container}>
       <Header />
-      <Menu /> {/* Re-renders when refreshKey changes */}
+      <Menu  /> {/* Re-renders when refreshKey changes */}
     </div>
   );
 };

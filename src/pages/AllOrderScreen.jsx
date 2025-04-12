@@ -162,10 +162,10 @@ const AllOrderScreen = () => {
       {cart.length > 0 && (
         <div className="footer">
           <p className="total-text">Total: ₦{calculateTotal()}</p>
-          <button className="order-button" onClick={handleCheckout}>
+          <button className="order-button" onClick={handleCheckout} style={{marginTop:0}}>
             <span className="order-button-text">Checkout Table</span>
           </button>
-          <button className="order-button" onClick={clearCart}>
+          <button className="order-button" onClick={clearCart} style={{marginTop:0}}>
             <span className="order-button-text">Back</span>
           </button>
         </div>

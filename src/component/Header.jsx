@@ -102,10 +102,11 @@ const styles = {
     padding: "10px",
     backgroundColor: "#2a5298",
     height:'50px',
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
+    zIndex:1000,
     
   },
   logo: {

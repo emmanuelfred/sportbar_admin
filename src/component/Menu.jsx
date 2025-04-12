@@ -108,7 +108,7 @@ const Menu = () => {
   return (
     <>
       {/* Header with Search & Cart */}
-      <div className="d-flex justify-content-between align-items-center mb-2 pt-5 ">
+      <div className="d-flex justify-content-between align-items-center mb-2 pt-5" >
         <input
           type="text"
           placeholder="Search menu..."
@@ -134,7 +134,7 @@ const Menu = () => {
             variant="secondary"
             onClick={() => handleCategorySelect(category)}
             className={`mr-2 ${selectedCategory === category ? "bg-primary text-white" : ""}`}
-            style={{margin:0,padding:5}}
+            style={{margin:0,padding:8}}
           >
             {category}
           </Button>
@@ -157,7 +157,7 @@ const Menu = () => {
                 <Card.Img variant="top" src={item.img} style={{height:'48%'}}/>
                 <Card.Body>
                   <Card.Title style={{fontSize:15,fontWeight:'bold'}}>{item.title}</Card.Title>
-                  <Card.Text>₦{item.price}</Card.Text>
+                  <Card.Text style={{margin:3}}>₦{item.price}</Card.Text>
                   <Button variant="primary" onClick={() => addToCart(item)} style={{margin:0}}>
                     Order Now
                   </Button>

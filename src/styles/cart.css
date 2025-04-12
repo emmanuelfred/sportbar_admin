@@ -1,3 +1,6 @@
+.cart-list{
+    width: 100%;
+}
 .cart-item{
     display: flex;
     justify-content: space-between;

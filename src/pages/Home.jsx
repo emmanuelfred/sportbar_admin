@@ -18,12 +18,10 @@ const Home = () => {
       <div ref={logoRef} className="logo-wrapper">
           <img src={logo} alt="Logo" className="logo" />
       </div>
-      <h1>Welcome to Sport Bar</h1>
+      <h1 style={{color:"#fff"}}>Welcome to Sport Bar</h1>
 
       <div  ref={buttonRef}className="btn-container">
-        <button className="btn" onClick={() => navigate("/customer")}>
-          Customer
-        </button>
+        
 
         <button className="btn" onClick={() => navigate("/salelogin")}>
           Sale Attendant

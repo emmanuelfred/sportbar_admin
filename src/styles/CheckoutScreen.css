@@ -1,0 +1,192 @@
+/* Container for the checkout screen */
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #121212;
+  padding: 20px;
+  color: #fff;
+}
+
+/* Title styling */
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Cart item summary styling */
+.cart-summary {
+  margin-bottom: 30px;
+}
+
+/* Cart item list styling */
+.cart-summary ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.cart-summary li {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  padding: 12px 0;
+}
+
+.cart-summary button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.cart-summary button:hover {
+  color: #007bff;
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Total price styling */
+.cart-summary h4 {
+  font-size: 18px;
+  color: #28a745;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Input fields styling */
+div input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+div input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Place order button styling */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #003d7a;
+}
+
+/* Modal styling */
+.modalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modalContent {
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modalTitle {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.modalBody {
+  font-size: 16px;
+  text-align: center;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modalFooter button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.modalFooter button:hover {
+  background-color: #0056b3;
+}
+
+.modalFooter button:active {
+  background-color: #003d7a;
+}
+
+/* Close modal button styling */
+.closeModal {
+  margin-top: 10px;
+  color: red;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.closeModal:hover {
+  text-decoration: underline;
+  color: #ff4d4d;
+}
+
+/* Add some responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .modalContent {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .cart-summary li {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

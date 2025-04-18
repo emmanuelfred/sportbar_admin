@@ -57,23 +57,27 @@ const Menu = () => {
 
   // Add item to cart
   const addToCart = (item) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+    const existingItem = cart.find(
+      (cartItem) => cartItem.id === item.id && cartItem.category === item.category
+    );
+  
     let updatedCart;
-
+  
     if (existingItem) {
       updatedCart = cart.map((cartItem) =>
-        cartItem.id === item.id
+        cartItem.id === item.id && cartItem.category === item.category
           ? { ...cartItem, quantity: cartItem.quantity + 1 }
           : cartItem
       );
     } else {
       updatedCart = [...cart, { ...item, quantity: 1 }];
     }
-
+  
     setCart(updatedCart);
     saveCart(updatedCart);
-    console.log(cart)
+    console.log(cart);
   };
+  
 
   // Remove item from cart
   const removeFromCart = (id) => {

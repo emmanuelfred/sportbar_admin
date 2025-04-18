@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { IoCartOutline, IoCloseOutline, IoTrashOutline } from "react-icons/io5";
+import { IoCartOutline, IoTrashOutline } from "react-icons/io5";
 import { Modal, Button,  Card, ListGroup, Badge, Spinner } from "react-bootstrap";
-import { FaSearch } from "react-icons/fa";
+
 
 const API_URL = "https://thesportsbar.com.ng/sport/get_all_items.php"; // Replace with your server URL
 
@@ -17,7 +17,7 @@ const Menu = () => {
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartVisible, setCartVisible] = useState(false);
-  const [refreshKey, setRefreshKey] = useState(0); // Key for re-rendering
+
 
   const navigate = useNavigate();
 

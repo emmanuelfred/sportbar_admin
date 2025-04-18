@@ -201,6 +201,7 @@ const CheckoutScreen = () => {
         item_name: item.title,
         item_price: item.price,
         item_portion: item.quantity,
+        item_catergory: item.category,
       })),
     };
   
@@ -296,6 +297,7 @@ const CheckoutScreen = () => {
         title: item.item_name, // Save item_name as title
         price: item.item_price, // Save item_price as price
         quantity: item.item_portion || 1, // Save item_portion as quantity (default to 1 if missing)
+        catergory: item.item_catergory,
       }));
   
       // Log the updated cart to check if the structure is correct
@@ -360,6 +362,7 @@ const CheckoutScreen = () => {
           item_name: item.title,
           item_price: item.price,
           item_portion: item.quantity,
+          item_catergory: item.category,
         })),
       };
   

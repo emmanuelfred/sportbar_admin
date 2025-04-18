@@ -72,6 +72,7 @@ const Menu = () => {
 
     setCart(updatedCart);
     saveCart(updatedCart);
+    console.log(cart)
   };
 
   // Remove item from cart

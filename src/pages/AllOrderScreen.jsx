@@ -134,7 +134,7 @@ const AllOrderScreen = () => {
         </div>
       ) : (
        cart.map((item) => (
-                   <div className="cart-item" key={item.id}>
+                   <div className="cart-item" key={item.id + Math.random()}>
                      <span className="item-title">{item.title}</span>
        
                      <div className="quantity-container">

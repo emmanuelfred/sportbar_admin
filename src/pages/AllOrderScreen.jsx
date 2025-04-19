@@ -47,18 +47,19 @@ const AllOrderScreen = () => {
     }
   };
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = (id, category, quantity) => {
     if (quantity < 1) {
-      removeFromCart(id);
+      removeFromCart(id, category); // Make sure this also checks category
     } else {
-      const updatedCart = cart.map(item =>
-        item.id === id ? { ...item, quantity } : item
+      const updatedCart = cart.map((item) =>
+        item.id === id && item.category === category
+          ? { ...item, quantity }
+          : item
       );
       setCart(updatedCart);
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
   };
-
   const removeFromCart = (id) => {
     const updatedCart = cart.filter(item => item.id !== id);
     setCart(updatedCart);
@@ -137,22 +138,22 @@ const AllOrderScreen = () => {
                    <div className="cart-item" key={item.id + Math.random()}>
                      <span className="item-title">{item.title}</span>
        
-                     <div className="quantity-container">
-                       <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-                         <FaMinusCircle color="red" />
-                       </button>
-       
-                       <input
-                         type="number"
-                         className="quantity-input"
-                         value={item.quantity}
-                         onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
-                       />
-       
-                       <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                         <FaPlusCircle color="green" />
-                       </button>
-                     </div>
+                       <div className="quantity-container">
+                               <button onClick={() => updateQuantity(item.id, item.category, item.quantity - 1)}>
+                                 <FaMinusCircle color="red" />
+                               </button>
+                       
+                               <input
+                                 type="number"
+                                 className="quantity-input"
+                                 value={item.quantity}
+                                 onChange={(e) => updateQuantity(item.id, item.category, parseInt(e.target.value) || 1)}
+                               />
+                       
+                               <button onClick={() => updateQuantity(item.id, item.category, item.quantity + 1)}>
+                                 <FaPlusCircle color="green" />
+                               </button>
+                             </div>
        
                      <span className="item-price">₦{item.price * item.quantity}</span>
                    </div>

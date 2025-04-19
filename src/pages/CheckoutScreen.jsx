@@ -438,32 +438,28 @@ const CheckoutScreen = () => {
           <button className="back-button" onClick={clearCart}>Back</button>
         </div>
       ) : (
-        <div className="cart-list">
-          {cart.map((item) => (
-            <div className="cart-item" key={item.id + Math.random()}>
-              <span className="item-title">{item.title}</span>
-
-              <div className="quantity-container">
-                <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-                  <FaMinusCircle color="red" />
-                </button>
-
-                <input
-                  type="number"
-                  className="quantity-input"
-                  value={item.quantity}
-                  onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
-                />
-
-                <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                  <FaPlusCircle color="green" />
-                </button>
-              </div>
-
-              <span className="item-price">₦{item.price * item.quantity}</span>
-            </div>
-          ))}
+        <div className="cart-item" key={`${item.id}-${item.category}`}>
+        <span className="item-title">{item.title}</span>
+  
+        <div className="quantity-container">
+          <button onClick={() => updateQuantity(item.id, item.category, item.quantity - 1)}>
+            <FaMinusCircle color="red" />
+          </button>
+  
+          <input
+            type="number"
+            className="quantity-input"
+            value={item.quantity}
+            onChange={(e) => updateQuantity(item.id, item.category, parseInt(e.target.value) || 1)}
+          />
+  
+          <button onClick={() => updateQuantity(item.id, item.category, item.quantity + 1)}>
+            <FaPlusCircle color="green" />
+          </button>
         </div>
+  
+        <span className="item-price">₦{item.price * item.quantity}</span>
+      </div>
       )}
 
       {cart.length > 0 && (

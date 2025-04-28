@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useLocation,useSearchParams } from "react-router-dom"; // For handling URL parameters
-import Header from "../component/Header"; // Assuming you have a Header component
-import '../styles/ReturnItem.css'; // Assuming you have a separate CSS file for styling
+import { useLocation, useSearchParams } from "react-router-dom";
+import Header from "../component/Header";
+import "../styles/ReturnItem.css";
 
 const ReturnItem = () => {
-    const { state } = useLocation(); // Using react-router's useLocation to access the parameters
-     const [searchParams] = useSearchParams();
+    const { state } = useLocation();
+    const [searchParams] = useSearchParams();
     
-      const staff_id = searchParams.get("staff_id");
-      const log_name = searchParams.get("log_name");
-      const table_number = searchParams.get("table_number");
-      const ordersString = searchParams.get("orders");
-      const orders = ordersString ? JSON.parse(decodeURIComponent(ordersString)) : [];
+    const staff_id = searchParams.get("staff_id");
+    const log_name = searchParams.get("log_name");
+    const table_number = searchParams.get("table_number");
+    const ordersString = searchParams.get("orders");
+    const orders = ordersString ? JSON.parse(decodeURIComponent(ordersString)) : [];
 
     const [items, setItems] = useState([]);
-    const [selectedItems, setSelectedItems] = useState([]);
+    const [selectedItems, setSelectedItems] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -24,7 +24,6 @@ const ReturnItem = () => {
                     `https://thesportsbar.com.ng/sport/get_items.php?staff_id=${staff_id}&log_name=${log_name}&table_number=${table_number}`
                 );
                 const data = await response.json();
-
                 if (data.success) {
                     setItems(data.items);
                 } else {
@@ -39,23 +38,29 @@ const ReturnItem = () => {
         fetchItems();
     }, [staff_id, log_name, table_number]);
 
-    const toggleSelection = (itemId) => {
-        setSelectedItems((prevSelected) =>
-            prevSelected.includes(itemId)
-                ? prevSelected.filter((id) => id !== itemId)
-                : [...prevSelected, itemId]
-        );
+    const toggleSelection = (itemId, portion) => {
+        setSelectedItems((prevSelected) => ({
+            ...prevSelected,
+            [itemId]: portion
+        }));
     };
 
     const handleReturn = async () => {
-        // Check if any items are selected
-        if (selectedItems.length === 0) {
-            alert("Please select items to return.");
+        if (Object.keys(selectedItems).length === 0) {
+            alert("Please select items and enter portion to return.");
             return;
         }
 
+        // Validate all portions
+        for (const itemId in selectedItems) {
+            const portion = selectedItems[itemId];
+            if (!portion || isNaN(portion) || portion <= 0) {
+                alert("Please enter a valid portion for all selected items.");
+                return;
+            }
+        }
+
         try {
-            // Send the selected items to the backend
             const response = await fetch("https://thesportsbar.com.ng/sport/return_items.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -63,11 +68,10 @@ const ReturnItem = () => {
                     table_number,
                     staff_id,
                     log_name,
-                    items: selectedItems,
+                    items: selectedItems, // send {itemId: portion} format
                 }),
             });
 
-            // Log request details for debugging
             console.log("Sending Request:", {
                 table_number,
                 staff_id,
@@ -75,26 +79,18 @@ const ReturnItem = () => {
                 items: selectedItems,
             });
 
-            // Parse the response
             const result = await response.json();
-
-            // Check if the response indicates success
             if (result.success) {
-                // Filter out the returned items from the list of items
-                setItems((prevItems) => prevItems.filter((item) => !selectedItems.includes(item.id)));
-
-                // Clear selected items
-                setSelectedItems([]);
-
-                // Show success message
                 alert("Items returned successfully!");
+            
+                // Refresh the page
+                window.location.reload();
             } else {
-                // Handle failure case
                 console.log("Return Error:", result.errors || result.message);
                 alert("Failed to return items.");
             }
+            
         } catch (error) {
-            // Catch and log any errors
             console.error("Error returning items:", error);
             alert("An error occurred while returning items. Please try again.");
         }
@@ -115,12 +111,29 @@ const ReturnItem = () => {
                             <li key={item.id} className="item-container">
                                 <input
                                     type="checkbox"
-                                    checked={selectedItems.includes(item.id)}
-                                    onChange={() => toggleSelection(item.id)}
+                                    checked={selectedItems[item.id] !== undefined}
+                                    onChange={(e) => {
+                                        if (!e.target.checked) {
+                                            const copy = { ...selectedItems };
+                                            delete copy[item.id];
+                                            setSelectedItems(copy);
+                                        } else {
+                                            toggleSelection(item.id, "");
+                                        }
+                                    }}
                                 />
-                                <span className="item-text">
-                                    {item.item_name} - ₦{parseFloat(item.item_price).toLocaleString()}
-                                </span>
+                                <span>{item.item_name} - ₦{parseFloat(item.item_price).toLocaleString()} (Available: {item.item_portion})</span>
+
+                                {selectedItems[item.id] !== undefined && (
+                                    <input
+                                        type="number"
+                                        className="portion-input"
+                                        placeholder="Portion to return"
+                                        value={selectedItems[item.id]}
+                                        min="1"
+                                        onChange={(e) => toggleSelection(item.id, e.target.value)}
+                                    />
+                                )}
                             </li>
                         ))}
                     </ul>
